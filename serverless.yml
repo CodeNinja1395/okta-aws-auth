@@ -13,3 +13,10 @@ functions:
           path: /
           method: get
           cors: true
+  auth:
+    handler: handler.auth
+    events:
+      - http:
+          path: /auth
+          method: any
+          cors: true

@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@okta/jwt-verifier": "0.0.12"
+    "@okta/jwt-verifier": "0.0.12",
+    "axios": "^0.18.0",
+    "jsonwebtoken": "^8.3.0",
+    "node-fetch": "^2.2.0"
   }
 }
