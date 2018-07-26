@@ -11,31 +11,28 @@ const oktaJwtVerifier = new OktaJwtVerifier({
     assertClaims: {
       aud: 'api://default'
     }
-  });
-const jwt = require('jsonwebtoken');
-const fetch = require('node-fetch');
-
+});
 
 module.exports.hello = (event, context, callback) => {   
 
     oktaJwtVerifier.verifyAccessToken(event.headers.token)
         .then((jwt) => {
             callback(null, {
-            statusCode: 200,
-            body: JSON.stringify({
-                message: jwt,
-                result: 'success'
-            })
-        });
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: jwt,
+                    result: 'success'
+                })
+            });
         })
         .catch((err) => {
-            callback(null, {
-            statusCode: 200,
-            body: JSON.stringify({
-                message: err,
-                result: 'error'
-            })
-        }); 
+                callback(null, {
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: err,
+                    result: 'error'
+                })
+            }); 
         }); 
 };
 

@@ -8,13 +8,10 @@ provider:
 functions:
   hello:
     handler: handler.test
-    integration: lambda
-    authorizer: auth
     events:
       - http:
           path: /
           method: get
           cors: true
-  auth:
-    handler: handler.auth
+
 
