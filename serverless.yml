@@ -6,12 +6,15 @@ provider:
   runtime: nodejs6.10
 
 functions:
-  hello:
+  test:
     handler: handler.test
+    integration: lambda   
     events:
       - http:
           path: /
           method: get
+          authorizer: auth
           cors: true
-
+  auth:
+    handler: handler.auth
 
