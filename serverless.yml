@@ -7,7 +7,7 @@ provider:
 
 functions:
   test:
-    handler: handler.test
+    handler: functions/handler.test
     integration: lambda   
     events:
       - http:
@@ -16,5 +16,5 @@ functions:
           authorizer: auth
           cors: true
   auth:
-    handler: handler.auth
+    handler: functions/authorization.auth
 
