@@ -10,7 +10,7 @@ module.exports.auth = (event, context, callback) => {
     oktaJwtVerifier.verifyAccessToken(event.authorizationToken)
         .then(() => {
             callback(null, {
-                principalId: "user",
+                principalId: 'user',
                 policyDocument: {
                     Version: '2012-10-17',
                     Statement: [{
