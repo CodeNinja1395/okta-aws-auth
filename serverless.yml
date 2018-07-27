@@ -1,5 +1,5 @@
 
-service: lambda-auth # NOTE: update this with your service name
+service: lambda-auth 
 
 provider:
   name: aws
