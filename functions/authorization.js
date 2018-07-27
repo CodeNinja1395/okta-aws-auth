@@ -21,8 +21,7 @@ module.exports.auth = (event, context, callback) => {
                 },
             });
         })
-        .catch((err) => {
-            console.log(err);          
+        .catch((err) => {         
             callback('Unauthorized');
         });      
 };
