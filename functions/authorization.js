@@ -8,7 +8,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 
 module.exports.auth = (event, context, callback) => {
     oktaJwtVerifier.verifyAccessToken(event.authorizationToken)
-        .then((jwt) => {
+        .then(() => {
             callback(null, {
                 principalId: "user",
                 policyDocument: {
