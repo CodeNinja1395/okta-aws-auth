@@ -1,27 +1,23 @@
+const config = require('../config.js');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 const oktaJwtVerifier = new OktaJwtVerifier({
-    issuer: 'https://dev-890466.oktapreview.com/oauth2/default',
+    issuer: config.issuer,
     assertClaims: {
-      aud: 'api://default'
+        aud: config.aud,
+        cid: config.cid
     }
 });
 
 module.exports.auth = (event, context, callback) => {
     oktaJwtVerifier.verifyAccessToken(event.authorizationToken)
-        .then((jwt) => {
-            callback(null, {
-                principalId: "user",
-                policyDocument: {
-                    Version: '2012-10-17',
-                    Statement: [{
-                        Action: 'execute-api:Invoke',
-                        Effect: 'Allow',
-                        Resource: 'arn:aws:execute-api:us-east-1:810430796289:a4gzrnox4a/*/GET/',              
-                    }]
-                },
-            });
+        .then(() => {
+            callback(null, config.generatePolicy('Allow', event.methodArn));
         })
-        .catch((err) => {         
-            callback('Unauthorized');
+        .catch((err) => { 
+            if (err.denied){
+                callback(null, config.generatePolicy('Deny', event.methodArn));
+            } else {
+                callback('Unauthorized');
+            }         
         });      
 };
